@@ -1,0 +1,5 @@
+export * from './audio-conversion-options'
+export * from './audio-metadata'
+export * from './ffmpeg-config'
+export * from './ffmpeg-error'
+export * from './state'
