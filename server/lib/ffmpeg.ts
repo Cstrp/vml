@@ -33,7 +33,7 @@ export const initFFmpeg = async (config?: Partial<FFmpegConfig>): Promise<void> 
       },
     };
 
-    const ffmpegPath = config?.ffmpegPath || ffmpegInstaller.path;
+    const ffmpegPath = config?.ffmpegPath || ffmpegInstaller.path || 'system default';
     ffmpeg.setFfmpegPath(ffmpegPath);
 
     ffmpegState = {
@@ -205,7 +205,6 @@ export const convertAudio = async (
   });
 };
 
-
 export const getAudioInfo = async (audio: ArrayBuffer): Promise<unknown> => {
   if (!ffmpegState?.isInitialized) {
     throw new Error("FFmpeg not initialized. Call initFFmpeg() first.");
@@ -226,7 +225,6 @@ export const getAudioInfo = async (audio: ArrayBuffer): Promise<unknown> => {
       });
   });
 };
-
 
 export const resetFFmpeg = (): void => {
   ffmpegState = null;
