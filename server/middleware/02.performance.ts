@@ -47,7 +47,7 @@ export default defineEventHandler((event: H3Event) => {
       });
     }
 
-    if (duration > 1000 && event.context.logger) {
+    if (duration > 5000 && event.context.logger) {
       event.context.logger.warn(
         {
           duration,

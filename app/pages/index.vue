@@ -1,3 +1,3 @@
 <template>
-  <div class="container mx-auto">123</div>
+  <div class="container mx-auto">Hello world</div>
 </template>

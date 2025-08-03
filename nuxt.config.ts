@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  css: ['~/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css', '~/assets/css/font.css', '~/assets/css/utils.css'],
 
   vite: {
     plugins: [
@@ -27,7 +27,7 @@ export default defineNuxtConfig({
         },
       },
     },
-    experimental: { tasks: true, asyncContext: true },
+    experimental: { tasks: true, asyncContext: true, openAPI: true },
     scheduledTasks: {
       "0 12 * * * *": ["app:health-check"], // every day at 12:00
       // "0 0 * * 0": ["task:name"], // every Sunday at 00:00
@@ -35,6 +35,10 @@ export default defineNuxtConfig({
       // "0 12 * * 1-5": ["task:name"], // every weekday at 12:00
       // "0 0 1 * *": ["task:name"], // first day of every month at 00:00
     },
+    hooks: {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      'dev:reload': () => require('sharp')
+    }
   },
 
   runtimeConfig: {
@@ -100,6 +104,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     '@nuxtjs/i18n',
     'v-wave/nuxt',
+    'nuxt-delay-hydration',
   ],
 
   shadcn: {

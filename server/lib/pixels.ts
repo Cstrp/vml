@@ -178,7 +178,7 @@ const findVideoInternal = async (
         }
 
         // Calculate the real duration of the video by converting the FPS to 25
-        const fps = video.video_files[0].fps;
+        const fps = video.video_files[0]!.fps;
         const duration =
           fps < 25 ? video.duration * (fps / 25) : video.duration;
 
@@ -216,7 +216,7 @@ const findVideoInternal = async (
       "Found video from Pexels API",
     );
 
-    return video;
+    return video ?? {} as Video;
   } catch (error: unknown) {
     logger.error(error, "Error fetching videos from Pexels API");
     throw error;
