@@ -53,13 +53,13 @@ export const getOrientationConfig = (orientation: OrientationEnum): OrientationC
 /**
  * Initialize Pixels API with configuration
  */
-export const initPixels = (apiKey: string, config?: Partial<PixelsConfig>): void => {
-  if (!apiKey) {
+export const initPixels = async (config?: Partial<PixelsConfig>): Promise<void> => {
+  if (!config?.apiKey) {
     throw new Error("API key is required for Pixels initialization");
   }
 
   const defaultConfig: PixelsConfig = {
-    apiKey,
+    apiKey: config.apiKey,
     defaultTimeout: DEFAULT_TIMEOUT_MS,
     retryTimes: DEFAULT_RETRY_TIMES,
     durationBufferSeconds: DEFAULT_DURATION_BUFFER_SECONDS,
@@ -70,7 +70,7 @@ export const initPixels = (apiKey: string, config?: Partial<PixelsConfig>): void
     config: {
       ...defaultConfig,
       ...config,
-      apiKey, // Ensure apiKey is always set
+      apiKey: config.apiKey, // Ensure apiKey is always set
     },
     isInitialized: true,
   };

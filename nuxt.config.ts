@@ -22,8 +22,7 @@ export default defineNuxtConfig({
           "Referrer-Policy": "strict-origin-when-cross-origin",
           "X-XSS-Protection": "1; mode=block",
           "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-          "Content-Security-Policy":
-            "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'",
+          "Content-Security-Policy": 'false'
         },
       },
     },
@@ -35,10 +34,9 @@ export default defineNuxtConfig({
       // "0 12 * * 1-5": ["task:name"], // every weekday at 12:00
       // "0 0 1 * *": ["task:name"], // first day of every month at 00:00
     },
-    hooks: {
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      'dev:reload': () => require('sharp')
-    }
+    // hooks: {
+    //   'dev:reload': async () => await import('onnxruntime-node')
+    // }
   },
 
   runtimeConfig: {

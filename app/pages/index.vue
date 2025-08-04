@@ -1,3 +1,9 @@
+<script setup lang="ts">
+</script>
+
 <template>
-  <div class="container mx-auto">Hello world</div>
+  <div class="min-h-screen space-y-8">
+    <SoundForm />
+  </div>
 </template>
+
