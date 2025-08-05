@@ -1,5 +1,8 @@
 import { generateAudio } from "~~/server/lib";
 import { VoiceEnum } from "../../../shared";
+import crypto from 'node:crypto'
+import fs from 'fs/promises';
+import path from 'node:path'
 import z from "zod";
 
 const schema = z.object({
@@ -36,13 +39,20 @@ export default defineEventHandler(async (event) => {
       device: kokoroCfg?.device === "cpu" ? "cpu" : undefined,
     });
 
-    const res = event.node.res;
 
-    res.setHeader("Content-Type", "audio/wav");
-    res.setHeader("Content-Disposition", 'attachment; filename="tts.wav"');
-    res.setHeader("Content-Length", Buffer.byteLength(audioResponse.audio));
+    const publicDir = path.resolve(process.cwd(), 'public', 'tts');
 
-    res.end(Buffer.from(audioResponse.audio));
+    await fs.mkdir(publicDir, { recursive: true });
+
+    const fileName = `tts_${crypto.randomUUID()}.wav`;
+    const filePath = path.join(publicDir, fileName);
+
+    await fs.writeFile(filePath, Buffer.from(audioResponse.audio));
+
+    return {
+      success: true,
+      url: `/tts/${fileName}`,
+    };
   } catch (error) {
     console.error("Kokoro TTS Error:", error);
 

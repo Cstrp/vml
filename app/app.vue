@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Toaster, TooltipProvider } from "#components";
 import "vue-sonner/style.css";
 </script>
 
