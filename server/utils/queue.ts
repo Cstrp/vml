@@ -1,7 +1,7 @@
 import { Queue, type QueueOptions } from "bullmq";
 import { Redis } from "ioredis";
 
-const queueMap = new Map<string, Queue>();
+export const queueMap = new Map<string, Queue>();
 
 export const useQueue = <
   DataType = unknown,

@@ -42,11 +42,12 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       API_BASE_URL: process.env.API_BASE_URL || 'http://localhost:3000/api',
+      OPENVERSE_API_KEY: process.env.OPENVERSE_API_KEY || 'demo',
       PEXELS_API_KEY: process.env.PEXELS_API_KEY || 'demo',
 
       whisper: {
         RUNNING_IN_DOCKER: process.env.RUNNING_IN_DOCKER === 'true',
-        WHISPER_INSTALL_PATH: process.env.WHISPER_INSTALL_PATH,
+        WHISPER_INSTALL_PATH: process.env.WHISPER_INSTALL_PATH || './data/libs/whisper',
         WHISPER_VERSION: process.env.WHISPER_VERSION || 'v1.5.4',
         WHISPER_VERBOSE: process.env.WHISPER_VERBOSE === 'true',
         WHISPER_MODEL_PATH: process.env.WHISPER_MODEL_PATH,
@@ -93,7 +94,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
-    '@nuxt/test-utils',
+    '@nuxt/test-utils/module',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate',
     '@nuxtjs/color-mode',
@@ -104,6 +105,7 @@ export default defineNuxtConfig({
     'v-wave/nuxt',
     'nuxt-delay-hydration',
   ],
+
 
   shadcn: {
     /**

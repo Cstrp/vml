@@ -1,7 +1,7 @@
 import type { OpenverseRequestParams, OpenverseResponse } from '@@/shared'
 import { $fetch } from 'ofetch';
 
-export const initOpenverse = async (config: { apiKey: string }) => {
+export const initializeOpenverse = async (config: { apiKey: string }) => {
   if (!config.apiKey) {
     throw new Error("Openverse API key is required");
   }

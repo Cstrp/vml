@@ -2,7 +2,7 @@ import { type Processor, type WorkerOptions, Worker } from "bullmq";
 import { Redis } from "ioredis";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const workerMap = new Map<string, Worker<any, any, any>>();
+export const workerMap = new Map<string, Worker<any, any, any>>();
 
 export const useWorker = <
   DataType = unknown,

@@ -18,7 +18,7 @@ export default defineLazyEventHandler(() => {
       });
     }
 
-    logger.info({ query }, "Received video status check request");
+    logger.info({ query }, "Received video delete request");
 
     const videoId = data.id;
     const target = queueMap.get(videoId);
@@ -32,6 +32,23 @@ export default defineLazyEventHandler(() => {
       });
     }
 
-    return { success: true, data: target, message: 'Video status retrieved successfully' };
+    const worker = queueMap.get(videoId);
+    const handler = workerMap.get(videoId);
+
+    if (!worker) {
+      logger.warn({ videoId }, "Worker not found");
+
+      throw createError({
+        statusCode: 404,
+        message: "Worker not found",
+      });
+    }
+
+    worker?.close();
+    handler?.close();
+
+    logger.info({ videoId }, "Video removed from processing queue");
+
+    return { success: true, message: 'Video successfully deleted' };
   })
 })
